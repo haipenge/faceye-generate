@@ -228,30 +228,10 @@
 		</profile>
 	</profiles>
 	<repositories>
-		<repository>
-			<id>nexus-oschina</id>
-			<name>local private nexus</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+		
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus-oschina</id>
-			<name>local private nexus</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
+		
 	</pluginRepositories>
 </project>
 	

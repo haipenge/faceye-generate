@@ -3,7 +3,7 @@
 <!-- Author @haipenge -->
 <!-- E-mail:haipenge@gmail.com -->
 <project name="generate-tools" basedir="." default="help">
-	<import file="build-scp.xml"></import>
+	
 	<import file="build-empty-project.xml" />
 	<property file="build.properties"></property>
 	<!-- 定义常量 -->
@@ -14,7 +14,7 @@
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
-			<pathelement location="/program/apache-ant-1.9.2/lib/ant-contrib-1.0b3.jar" />
+			<pathelement location="/program/apache-ant-1.9.7/lib/ant-contrib-1.0b3.jar" />
 		</classpath>
 	</taskdef>
 	<target name="info">
