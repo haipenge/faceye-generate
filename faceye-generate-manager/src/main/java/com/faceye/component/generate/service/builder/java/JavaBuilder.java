@@ -139,46 +139,40 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 		} else {
 			faceyeTemplateSourceDir += "/mongo";
 		}
-		// Manager
-		String emptyProjectTargetDir = path + "/" + project.getName();
-		// this.copySource(faceyeTemplateSourceDir + "/faceye-template-manager", emptyProjectTargetDir + "/" + project.getName() + "-manager", packageName);
 		try {
-			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-manager", emptyProjectTargetDir + "/" + project.getName() + "-manager");
-		} catch (IOException e) {
-			logger.error(">>FaceYe Throws Exception:", e);
-		}
-		// Entity
-		String emptyEntityPRojectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-entity";
-		// this.copySource(faceyeTemplateSourceDir + "/faceye-template-entity", emptyEntityPRojectTargetDir, packageName);
-		try {
+			String emptyProjectTargetDir = path + "/" + project.getName();
+			// Manager
+			String emptyManagerProjectDir=emptyProjectTargetDir+ "/" + project.getName() + "-manager";
+			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-manager", emptyManagerProjectDir);
+			// Entity
+			String emptyEntityPRojectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-entity";
 			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-entity", emptyEntityPRojectTargetDir);
-		} catch (IOException e) {
-			logger.error(">>FaceYe Throws Exception:", e);
-		}
-		// API
-		String apiProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-api";
-		// this.copySource(faceyeTemplateSourceDir + "/faceye-template-api", apiProjectTargetDir, packageName);
-		try {
+			// API
+			String apiProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-api";
 			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-api", apiProjectTargetDir);
-		} catch (IOException e) {
-			logger.error(">>FaceYe Throws Exception:", e);
-		}
-		// WEB
-		String webProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-web";
-		// this.copySource(faceyeTemplateSourceDir + "/faceye-template-web", webProjectTargetDir, packageName);
-		try {
+			// WEB
+			String webProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-web";
 			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-web", webProjectTargetDir);
-		} catch (IOException e) {
-			logger.error(">>FaceYe Throws Exception:", e);
-		}
-		//Mobile
-		String mobileProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-mobile";
-		// this.copySource(faceyeTemplateSourceDir + "/faceye-template-web", webProjectTargetDir, packageName);
-		try {
+			// Mobile
+			String mobileProjectTargetDir = emptyProjectTargetDir + "/" + project.getName() + "-mobile";
 			DirectoryUtil.copyDirectiory(faceyeTemplateSourceDir + "/faceye-template-mobile", mobileProjectTargetDir);
 		} catch (IOException e) {
 			logger.error(">>FaceYe Throws Exception:", e);
 		}
+		return res;
+	}
+
+	/**
+	 * 生成JPA项目的骨架
+	 * 
+	 * @param project
+	 * @return
+	 * @Desc:
+	 * @Author:haipenge
+	 * @Date:2017年5月21日 下午8:42:59
+	 */
+	private boolean generateEmptyJpaProjectStruct(Project project) {
+		boolean res = false;
 		return res;
 	}
 
@@ -220,7 +214,7 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 		// String projectName = packages[1];
 		String projectName = project.getName();
 		String dir = this.getProjectDir(project);
-		dir=dir+"/"+project.getName();
+		dir = dir + "/" + project.getName();
 		List<Map<String, String>> replaces = new ArrayList<Map<String, String>>(0);
 		Map<String, String> rep1 = new HashMap();
 		rep1.put("pattern", "@PROJECT-NAME@");
@@ -379,7 +373,7 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 
 		searchParams.put("EQ|component.$id", component.getId());
 		List<Entity> entities = this.entityService.getPage(searchParams, 1, 0).getContent();
-		String[] projectTypes = new String[] { "manager", "web", "api","mobile" };
+		String[] projectTypes = new String[] { "manager", "web", "api", "mobile" };
 		if (CollectionUtils.isNotEmpty(entities)) {
 			for (Entity entity : entities) {
 				Document document = this.buildDynamicDocument(project, component, entity);
@@ -395,6 +389,7 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 
 	/**
 	 * x-smart-entity 模块生成
+	 * 
 	 * @param project
 	 * @param component
 	 * @param entity
@@ -414,12 +409,12 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 		} else {
 			tplName = "document.ftl";
 		}
-		
+
 		FreeMarkerHandler.getInstance().processGenerate(tplName, document, entityPath, true);
 		// i18n
 		String i18nPath = this.getSrcJavaEntityI18NDir(project);
 		PathUtil.mkdir(i18nPath);
-		String filePath = i18nPath + "/" +CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity.getClassName()) + "_zh_CN.properties";
+		String filePath = i18nPath + "/" + CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity.getClassName()) + "_zh_CN.properties";
 		tplName = "i18n.ftl";
 		FreeMarkerHandler.getInstance().processGenerate(tplName, document, filePath, false);
 	}
@@ -481,17 +476,17 @@ public class JavaBuilder extends BaseBuilder implements Builder {
 		// 生成Controller
 		if (StringUtils.equalsIgnoreCase(projectType, "api")) {
 			tplName = "controller_api.ftl";
-		} else if(StringUtils.equalsIgnoreCase(projectType, "web")){
+		} else if (StringUtils.equalsIgnoreCase(projectType, "web")) {
 			tplName = "controller_web.ftl";
-		}else if(StringUtils.equalsIgnoreCase(projectType, "mobile")){
+		} else if (StringUtils.equalsIgnoreCase(projectType, "mobile")) {
 			tplName = "controller_mobile.ftl";
-		}else  {
+		} else {
 			tplName = "controller_manager.ftl";
 		}
 		String controllerPath = this.getSrcJavaControllerDir(project, component, projectType);
 		filePath = controllerPath + "/" + entity.getClassName() + "Controller.java";
 		FreeMarkerHandler.getInstance().processGenerate(tplName, document, filePath, false);
-		
+
 		// 生成tiles
 		if (!StringUtils.equalsIgnoreCase(projectType, "api")) {
 			path = this.getSrcMainResourceDir(project, component, projectType);
