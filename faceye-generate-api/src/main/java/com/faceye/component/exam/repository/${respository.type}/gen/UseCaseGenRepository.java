@@ -1,7 +1,7 @@
 package com.faceye.component.exam.repository.mongo.gen;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.faceye.component.exam.entity.UseCase;
 import com.faceye.component.exam.repository.mongo.customer.UseCaseCustomerRepository;

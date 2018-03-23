@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -163,6 +164,7 @@ public class ${entity.className} implements Serializable {
     * @author ${project.author}<br>
     */
     @DateTimeFormat(pattern="yyyy-MM-dd hh24:mi:ss")
+    @CreateDate
 	private  Date createDate=new Date();
 	public Date getCreateDate() {
 		return createDate;

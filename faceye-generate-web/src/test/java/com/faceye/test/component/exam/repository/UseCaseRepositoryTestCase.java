@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
 import com.faceye.component.exam.entity.UseCase;
 import com.faceye.component.exam.repository.mongo.UseCaseRepository;
@@ -34,24 +34,24 @@ public class UseCaseRepositoryTestCase extends BaseRepositoryTestCase {
 		UseCase entity = new UseCase();
 		this.useCaseRepository.save(entity);
 		Iterable<UseCase> entities = this.useCaseRepository.findAll();
-		Assert.isTrue(entities.iterator().hasNext());
+		Assert.assertTrue(entities.iterator().hasNext());
 	}
 
 	@Test
 	public void testDelete() throws Exception {
 		UseCase entity = new UseCase();
 		this.useCaseRepository.save(entity);
-        this.useCaseRepository.delete(entity.getId());
+        this.useCaseRepository.deleteById(entity.getId());
         Iterable<UseCase> entities = this.useCaseRepository.findAll();
-		Assert.isTrue(!entities.iterator().hasNext());
+		Assert.assertTrue(!entities.iterator().hasNext());
 	}
 
 	@Test
 	public void testFindOne() throws Exception {
 		UseCase entity = new UseCase();
 		this.useCaseRepository.save(entity);
-		UseCase useCase=this.useCaseRepository.findOne(entity.getId());
-		Assert.isTrue(useCase!=null);
+		UseCase useCase=this.useCaseRepository.findById(entity.getId()).get();
+		Assert.assertTrue(useCase!=null);
 	}
 
 	

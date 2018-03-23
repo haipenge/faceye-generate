@@ -43,7 +43,7 @@ public class ${entity.className}ServiceImpl extends BaseServiceImpl<${entity.cla
      * 创建日期:${.now}<br>
 	*/
 	@Override
-	public Page<${entity.className}> getPage(Map<String, Object> searchParams, int page, int size) throws ServiceException {
+	public Page<${entity.className}> getPage(Map<String, Object> searchParams, int page, int size)   {
 		if (page != 0) {
 			page = page - 1;
 		}
@@ -60,7 +60,7 @@ public class ${entity.className}ServiceImpl extends BaseServiceImpl<${entity.cla
 		Sort sort = new Sort(Direction.DESC, "id");
 		Page<Driver> res = null;
 		if (size != 0) {
-			Pageable pageable = new PageRequest(page, size, sort);
+			Pageable pageable =  PageRequest.of(page, size, sort);
 			res = this.dao.findAll(spec, pageable);
 		} else {
 			// OrderSpecifier<Comparable> orderPOrderSpecifier=new OrderSpecifier<Comparable>(new Order(), new NumberExpression<Driver>("id") {

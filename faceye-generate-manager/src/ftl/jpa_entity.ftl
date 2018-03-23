@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
 
 <#list properties as property>
 <#if property.referenceEntity??>
@@ -136,6 +137,7 @@ public class ${entity.className} implements Serializable {
     * @author ${project.author}<br>
     */
     @Column(name="create_date")
+    @CreateDate
 	private  Date createDate=new Date();
 	public Date getCreateDate() {
 		return createDate;

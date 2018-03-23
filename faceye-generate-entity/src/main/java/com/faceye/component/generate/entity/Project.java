@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -62,7 +61,7 @@ public class Project implements Serializable {
 	//@NotNull(message="{generate.project.name.not.blank}")
 //	@NotBlank(message="{generate.project}")
 	@NotBlank()
-	@Length(min=3,max=20,message="{project.name.length.limit}")
+	//@Length(min=3,max=20,message="{project.name.length.limit}")
 	private String name;
 	public String getName() {
 		return name;

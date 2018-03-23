@@ -18,7 +18,7 @@ import com.faceye.component.@component.name@.repository.mongo.@entity.name@Repos
 import com.faceye.component.@component.name@.repository.mongo.customer.@entity.name@CustomerRepository;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
 
-import com.faceye.feature.util.ServiceException;
+ 
 import com.faceye.feature.repository.mongo.DynamicSpecifications;
 import com.faceye.feature.service.impl.BaseMongoServiceImpl;
 import com.querydsl.core.types.Predicate;
@@ -40,7 +40,7 @@ public class @entity.name@ServiceImpl extends BaseMongoServiceImpl<@entity.name@
 	
 	
 	@Override
-	public Page<@entity.name@> getPage(Map<String, Object> searchParams, int page, int size) throws ServiceException {
+	public Page<@entity.name@> getPage(Map<String, Object> searchParams, int page, int size)   {
 		if (page != 0) {
 			page = page - 1;
 		}
@@ -59,7 +59,7 @@ public class @entity.name@ServiceImpl extends BaseMongoServiceImpl<@entity.name@
 		Sort sort = new Sort(Direction.DESC, "id");
 		Page<@entity.name@> res = null;
 		if (size != 0) {
-			Pageable pageable = new PageRequest(page, size, sort);
+			Pageable pageable = PageRequest.of(page, size, sort);
 			res = this.dao.findAll(predicate, pageable);
 		} else {
 			// OrderSpecifier<Comparable> orderPOrderSpecifier=new OrderSpecifier<Comparable>(new Order(), new NumberExpression<@entity.name@>("id") {

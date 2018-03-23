@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
-import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -59,7 +59,7 @@ public class Component implements Serializable {
 	 * 数据库字段:create_date<br>
 	 * @author haipenge<br>
 	 */
-
+    @CreatedDate
 	private Date createDate=new Date();
 
 	public Date getCreateDate() {
@@ -92,7 +92,8 @@ public class Component implements Serializable {
     @NotBlank
     @Pattern(regexp="[a-z]+")
     @Size(min=2,max=20,message="{component.packageName.length.limit}")
-	private String packageName;
+	
+    private String packageName;
 
 	public String getPackageName() {
 		return packageName;

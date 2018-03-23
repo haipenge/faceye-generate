@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
 import com.faceye.component.exam.entity.EUser;
 import com.faceye.component.exam.repository.mongo.EUserRepository;
@@ -34,24 +34,24 @@ public class EUserRepositoryTestCase extends BaseRepositoryTestCase {
 		EUser entity = new EUser();
 		this.eUserRepository.save(entity);
 		Iterable<EUser> entities = this.eUserRepository.findAll();
-		Assert.isTrue(entities.iterator().hasNext());
+		Assert.assertTrue(entities.iterator().hasNext());
 	}
 
 	@Test
 	public void testDelete() throws Exception {
 		EUser entity = new EUser();
 		this.eUserRepository.save(entity);
-        this.eUserRepository.delete(entity.getId());
+        this.eUserRepository.deleteById(entity.getId());
         Iterable<EUser> entities = this.eUserRepository.findAll();
-		Assert.isTrue(!entities.iterator().hasNext());
+		Assert.assertTrue(!entities.iterator().hasNext());
 	}
 
 	@Test
 	public void testFindOne() throws Exception {
 		EUser entity = new EUser();
 		this.eUserRepository.save(entity);
-		EUser eUser=this.eUserRepository.findOne(entity.getId());
-		Assert.isTrue(eUser!=null);
+		EUser eUser=this.eUserRepository.findById(entity.getId()).get();
+		Assert.assertTrue(eUser!=null);
 	}
 
 	

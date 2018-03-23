@@ -15,7 +15,7 @@ import com.faceye.component.@component.name@.doc.@entity.name@;
 
 import com.faceye.component.@component.name@.repository.mongo.@entity.name@Repository;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
-import com.faceye.feature.util.ServiceException;
+ 
 import com.faceye.feature.service.impl.BaseMongoServiceImpl;
 /**
  * @entity.name@ 服务实现类<br>
